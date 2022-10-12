@@ -36,12 +36,12 @@ h3{
 .block-button{
     display: flex;
     align-items: center;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
 }
 
 .second-container{
-    padding-top: 3em;
-    padding-bottom: 3em;
+    padding-top: 2em;
+    padding-bottom: 2em;
 
     display: flex;
     width: 100%;
@@ -78,8 +78,8 @@ h3{
     padding-top: 3em;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    font-size: 12px;
-
+    font-size: 14px;
+    text-align: justify;
 }
 
 html {

@@ -92,7 +92,7 @@
     </div>
     <div class="fourth-container">
         <div class="block">
-            <h3>Number of Internet Users</h3>
+            <h3>Percentage of Internet Users</h3>
         </div>
         <div id="vis3"></div>
     </div>
@@ -312,7 +312,7 @@
                   "hconcat":[
                       {
                           "title":"Average Lowest Price of 1GB of Data",
-                          "width":100,
+                          "width":150,
                           "data":{
                               "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
                           },
@@ -364,7 +364,7 @@
                       },
                       {
                           "title":"Average Most Expensive Price of 1GB of Data",
-                          "width":100,
+                          "width":150,
                           "data":{
                               "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
                           },
@@ -438,8 +438,8 @@
   "encoding": {
     "x": {"field": "Year", "type": "temporal",
           "scale": {"domain": {"param": "time_brush"}}},
-    "y": {"field": "No_Of_Internet_Users", "type": "quantitative"},
-    "color": {"field": "Country_Name", "type": "nominal"}
+    "y": {"field": "No_Of_Internet_Users", "type": "quantitative", "title": "Number of Internet Users"},
+    "color": {"field": "Country_Name", "type": "nominal","title": "Continental Region"}
   }},
   {
   "transform": [{"filter": "datum.Country_Name=='World'"}],
@@ -454,7 +454,7 @@
       ],
   "encoding": {
     "x": {"field": "Year", "type": "temporal"},
-    "y": {"field": "No_Of_Internet_Users", "type": "quantitative"},
+    "y": {"field": "No_Of_Internet_Users", "type": "quantitative", "title": "Number of Internet Users"},
     "color": {"field": "Country_Name", "type": "nominal"}
   }}
   ]
