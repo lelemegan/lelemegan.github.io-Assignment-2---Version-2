@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+    <link rel="stylesheet" href="stylesheet.css"> 
+</head>
+  <body>
+
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+        "autosize": {
+  "type":"fit",
+  "resize": true
+},
+"$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+"params": [
+    {
+      "name": "Year_selection",
+      "value": 2022,
+      "bind": {
+        "input": "range",
+        "min": 2019,
+        "max": 2022,
+        "step": 1,
+        "name": "Year:  "
+      }
+    },
+    {
+      "name": "zoom_level",
+      "value": 100,
+      "bind": {
+        "input": "range",
+        "min": 100,
+        "max": 500,
+        "step": 5,
+        "name": "Zoom: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [-310, 85],
+      "bind": {
+        "input": "select",
+        "options": [
+          [-250, 90],
+          [-30, 70],
+          [144.9, -36.7],
+          [147.1, -38.1],
+          [147.1, -38.1],
+          [147.1, -38.1]
+        ],
+        "labels": ["Original", "SUB-SAHARAN AFRICA", "WESTERN EUROPE", "CARIBBEAN", "ASIA (EX. NEAR EAST)", "OCEANIA"],
+        "name": "Continental Region: "
+      }
+    }
+  ],
+"vconcat": [
+  {
+    "title": "Average Price in the World + {Year.Selection}",
+  "width": 500,
+  "height": 300,
+  
+  "projection": {
+    "type": "equalEarth",
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
+  },
+  "layer": [{
+                                    "data": {
+                                        "graticule": {
+                                            "step": [10, 10]
+                                        }
+                                    },
+                                    "mark": {
+                                        "type": "geoshape",
+                                        "stroke": "lightgrey"
+                                    }
+                                },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/lelemegan/Assignment-2/main/ne_110m_admin_0_countries.topojson.txt",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.NAME",
+          "as": "note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#ddd",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {"tooltip": {"field": "note"}}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
+      },
+      "transform": [
+        {
+          "lookup": "Name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/lelemegan/Assignment-2/main/ne_110m_admin_0_countries.topojson.txt",
+              "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_0_countries"
+              }
+            },
+            "key": "properties.NAME"
+          },
+          "as": "geo"
+        },
+        {"filter": "datum.Year == Year_selection"}
+      ],
+      "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5},
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "color": {
+          "field": "Average_Price",
+          "type": "quantitative",
+          "scale": {"type": "threshold",
+            "domain": [0.5,1, 2, 3, 4, 5,6,7,8,9,10],
+            "range": [
+              "#c5cae9",
+              "#9fa8da",
+              "#7986cb",
+              "#5c6bc0",
+              "#3f51b5",
+              "#3949ab"
+            ]},
+          "legend": {"format": ".2s"}
+        },
+        "tooltip": [
+          {"field": "Continental region", "type": "nominal", "title": "Continent"},
+          {
+            "field": "Average_Price",
+            "type": "quantitative",
+            "title": "Average Price in USD",
+            "format": ","
+          },
+          {"field": "Year", "type": "quantitative", "title": "Year"}
+        ]
+      }
+    }
+  ]
+  }, {"hconcat": [
+    {"title": "Average Lowest Price of 1GB of Data",
+      "width": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
+      },
+      "transform": [{"filter": "datum.Year == Year_selection & datum.Average_Price>0"}, {
+    "window": [{
+      "op": "rank",
+      "as": "rank"
+    }],
+    "sort": [{ "field": "Average_Price", "order": "ascending"}]
+  },
+        {"filter": "datum.rank <=5"}
+      ],
+  "mark": {"type": "bar", "cornerRadiusEnd": 4},
+    "encoding": {
+      "x": {"field": "Name",
+            "title": "Country",
+            "type": "nominal",
+            "sort": {"field": "Average_Price", "order": "descending"}
+      },
+      "y": {"field": "Average_Price",
+            "title": "Average Price",
+            "type": "quantitative"},
+      "color": {"value": "#ff9900"}
+    }
+    },
+    {"title": "Average Most Expensive Price of 1GB of Data",
+      "width": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
+      },
+      "transform": [{"filter": "datum.Year == Year_selection & datum.Average_Price>0"}, {
+    "window": [{
+      "op": "rank",
+      "as": "rank"
+    }],
+    "sort": [{ "field": "Average_Price", "order": "descending"}]
+  },
+        {"filter": "datum.rank <=5"}
+      ],
+  "mark": {"type": "bar", "cornerRadiusEnd": 4},
+    "encoding": {
+      "x": {"field": "Name",
+            "title": "Country",
+            "type": "nominal",
+            "sort": {"field": "Average_Price", "order": "descending"}
+      },
+      "y": {"field": "Average_Price",
+            "title": "Average Price",
+            "type": "quantitative"},
+      "color": {"value": "#ff9900"}
+    }
+    }
+  ]}
+  
+],
+"config": {}
+};    
+      vegaEmbed('#vis', yourVlSpec);
+
+      var yourV2Spec = {"autosize": {
+  "type":"fit",
+  "resize": true
+},
+                        "title": "Dotplot",
+                        "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+                        "description": "A ranged dot plot that uses 'layer' to convey changing life expectancy for the five most populous countries (between 1955 and 2000).",
+                        "data": {"url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version3%20Price%20Dataset.csv"},
+                        "transform": [{"filter": "datum.Year == 2022"},
+                            {
+                            "filter": {
+                                "field": "Name",
+                                "oneOf": ["China", "India", "United States", "Indonesia", "Brazil"]
+                            }
+                            },
+                            {"filter": {"field": "Price_Category", "oneOf": ["Cheapest 1GB (USD)", "Most expensive 1GB (USD)", "Average 1GB (USD)"]}}
+                        ],
+                        "encoding": {
+                            "x": {
+                            "field": "Price",
+                            "type": "quantitative",
+                            "title": "Price"
+                            },
+                            "y": {
+                            "field": "Name",
+                            "type": "nominal",
+                            "title": "Country",
+                            "axis": {"offset": 5, "ticks": false, "minExtent": 70, "domain": false}
+                            }
+                        },
+                        "layer": [
+                            {
+                            "mark": "line",
+                            "encoding": {
+                                "detail": {"field": "country", "type": "nominal"},
+                                "color": {"value": "#db646f"}
+                            }
+                            },
+                            {
+                            "mark": {"type": "point", "filled": true},
+                            "encoding": {
+                                "color": {
+                                "field": "Price_Category",
+                                "type": "nominal",
+                                "scale": {"domain": ["Cheapest 1GB (USD)", "Most expensive 1GB (USD)", "Average 1GB (USD)"], "range": ["#e6959c", "#911a24", "#FFFF90"]},
+                                "title": "Price Category"
+                                },
+                                "size": {"value": 100},
+                                "opacity": {"value": 1}
+                            }
+                            }
+                        ]
+                        };
+      vegaEmbed('#vis2', yourV2Spec);
+    </script>
+  </body>
+</html>
