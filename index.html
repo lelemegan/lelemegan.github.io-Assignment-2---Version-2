@@ -67,6 +67,25 @@
                 ante. Nulla facilisi. Praesent lorem quam, gravida in tellus sollicitudin, blandit pretium enim.
             </div>
         </div>
+        <div class="vis-block">
+            <div id="vis_b"></div>
+        </div>
+        <div class="block">
+            <div class="paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nibh id erat gravida, in porta elit mollis. 
+                Quisque in ligula mollis, rhoncus orci sit amet, hendrerit neque. Ut eu posuere augue. Nulla non lacus sem. Nullam 
+                non mauris neque. In hac habitasse platea dictumst. In pharetra eu odio ut rhoncus. Vestibulum non laoreet odio. 
+                Praesent venenatis egestas tristique. Pellentesque leo tortor, feugiat vitae consectetur et, semper eu augue. 
+                Pellentesque at vulputate mauris, non rhoncus enim. Quisque elementum leo lacus, ut imperdiet ipsum laoreet id. 
+                Aliquam ut massa tincidunt, sollicitudin dui a, semper ligula. Phasellus et elit ornare, efficitur est sit amet, 
+                bibendum enim. Etiam euismod ultrices nibh eu facilisis.
+                <br>
+                <br>
+                Nam feugiat velit ut bibendum laoreet. Proin sed quam magna. Fusce porttitor orci suscipit semper gravida. Phasellus 
+                ac erat sollicitudin, accumsan purus vitae, blandit ex. Nullam turpis turpis, tincidunt in lorem a, placerat feugiat 
+                ante. Nulla facilisi. Praesent lorem quam, gravida in tellus sollicitudin, blandit pretium enim.
+            </div>
+        </div>
     </div>
     <div class="third-container">
         <div class="block"> <!--tried adding pure-u-5-5 here-->
@@ -102,212 +121,146 @@
       }
 
       function renderGraph(year){
-        var data = {
-            "width": "container",
+        var world_map_data = {
           "autosize":{
               "type":"fit",
               "resize":true
           },
           "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
-          "params":[
-              {
-                  "name":"zoom_level",
-                  "value":100,
-                  "bind":{
-                      "input":"range",
-                      "min":100,
-                      "max":500,
-                      "step":5,
-                      "name":"Zoom: "
-                  }
-              },
-              {
-                  "name":"center_to",
-                  "value":[
-                      -310,
-                      85
-                  ],
-                  "bind":{
-                      "input":"select",
-                      "options":[
-                          [
-                              -250,
-                              90
-                          ],
-                          [
-                              -30,
-                              70
-                          ],
-                          [
-                              144.9,
-                              -36.7
-                          ],
-                          [
-                              147.1,
-                              -38.1
-                          ],
-                          [
-                              147.1,
-                              -38.1
-                          ],
-                          [
-                              147.1,
-                              -38.1
-                          ]
-                      ],
-                      "labels":[
-                          "Original",
-                          "SUB-SAHARAN AFRICA",
-                          "WESTERN EUROPE",
-                          "CARIBBEAN",
-                          "ASIA (EX. NEAR EAST)",
-                          "OCEANIA"
-                      ],
-                      "name":"Continental Region: "
-                  }
-              }
-          ],
-          "vconcat":[
-              {
-                  "title":`Average Price in the World ${year}`,
-                  "width":550,
-                  "height":300,
-                  "projection":{
-                      "type":"equalEarth",
-                      "center":{
-                          "expr":"center_to"
-                      },
-                      "scale":{
-                          "expr":"zoom_level"
-                      }
-                  },
-                  "layer":[
-                      {
-                          "data":{
-                              "graticule":{
-                                  "step":[
-                                      10,
-                                      10
-                                  ]
-                              }
-                          },
-                          "mark":{
-                              "type":"geoshape",
-                              "stroke":"lightgrey"
-                          }
-                      },
-                      {
-                          "data":{
-                              "url":"https://raw.githubusercontent.com/lelemegan/Assignment-2/main/ne_110m_admin_0_countries.topojson.txt",
-                              "format":{
-                                  "type":"topojson",
-                                  "feature":"ne_110m_admin_0_countries"
-                              }
-                          },
-                          "transform":[
-                              {
-                                  "calculate":"'Data is not available in ' + datum.properties.NAME",
-                                  "as":"note"
-                              }
-                          ],
-                          "mark":{
-                              "type":"geoshape",
-                              "fill":"#ddd",
-                              "stroke":"white",
-                              "strokeWidth":1
-                          },
-                          "encoding":{
-                              "tooltip":{
-                                  "field":"note"
-                              }
-                          }
-                      },
-                      {
-                          "data":{
-                              "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
-                          },
-                          "transform":[
-                              {
-                                  "lookup":"Name",
-                                  "from":{
-                                      "data":{
-                                          "url":"https://raw.githubusercontent.com/lelemegan/Assignment-2/main/ne_110m_admin_0_countries.topojson.txt",
-                                          "format":{
-                                              "type":"topojson",
-                                              "feature":"ne_110m_admin_0_countries"
-                                          }
-                                      },
-                                      "key":"properties.NAME"
-                                  },
-                                  "as":"geo"
-                              },
-                              {
-                                  "filter":`datum.Year == ${year}`
-                              }
-                          ],
-                          "mark":{
-                              "type":"geoshape",
-                              "stroke":"#fff",
-                              "strokeWidth":0.5
-                          },
-                          "encoding":{
-                              "shape":{
-                                  "field":"geo",
-                                  "type":"geojson"
-                              },
-                              "color":{
-                                  "field":"Average_Price",
-                                  "type":"quantitative",
-                                  "scale":{
-                                      "type":"threshold",
-                                      "domain":[
-                                          0.5,
-                                          1,
-                                          2,
-                                          3,
-                                          4,
-                                          5,
-                                          6,
-                                          7,
-                                          8,
-                                          9,
-                                          10
-                                      ],
-                                      "range":[
-                                          "#c5cae9",
-                                          "#9fa8da",
-                                          "#7986cb",
-                                          "#5c6bc0",
-                                          "#3f51b5",
-                                          "#3949ab"
-                                      ]
-                                  },
-                                  "legend":{
-                                      "format":".2s"
-                                  }
-                              },
-                              "tooltip":[
-                                  {
-                                      "field":"Continental region",
-                                      "type":"nominal",
-                                      "title":"Continent"
-                                  },
-                                  {
-                                      "field":"Average_Price",
-                                      "type":"quantitative",
-                                      "title":"Average Price in USD",
-                                      "format":","
-                                  },
-                                  {
-                                      "field":"Year",
-                                      "type":"quantitative",
-                                      "title":"Year"
-                                  }
-                              ]
-                          }
-                      }
-                  ]
-              },
+            "title":`Average Price in the World ${year}`,
+            "width":550,
+            "height":300,
+            "projection":{
+                "type":"equalEarth"
+            },
+            "layer":[
+                {
+                    "data":{
+                        "graticule":{
+                            "step":[
+                                10,
+                                10
+                            ]
+                        }
+                    },
+                    "mark":{
+                        "type":"geoshape",
+                        "stroke":"lightgrey"
+                    }
+                },
+                {
+                    "data":{
+                        "url":"https://raw.githubusercontent.com/lelemegan/Assignment-2/main/ne_110m_admin_0_countries.topojson.txt",
+                        "format":{
+                            "type":"topojson",
+                            "feature":"ne_110m_admin_0_countries"
+                        }
+                    },
+                    "transform":[
+                        {
+                            "calculate":"'Data is not available in ' + datum.properties.NAME",
+                            "as":"note"
+                        }
+                    ],
+                    "mark":{
+                        "type":"geoshape",
+                        "fill":"#ddd",
+                        "stroke":"white",
+                        "strokeWidth":1
+                    },
+                    "encoding":{
+                        "tooltip":{
+                            "field":"note"
+                        }
+                    }
+                },
+                {
+                    "data":{
+                        "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
+                    },
+                    "transform":[
+                        {
+                            "lookup":"Name",
+                            "from":{
+                                "data":{
+                                    "url":"https://raw.githubusercontent.com/lelemegan/Assignment-2/main/ne_110m_admin_0_countries.topojson.txt",
+                                    "format":{
+                                        "type":"topojson",
+                                        "feature":"ne_110m_admin_0_countries"
+                                    }
+                                },
+                                "key":"properties.NAME"
+                            },
+                            "as":"geo"
+                        },
+                        {
+                            "filter":`datum.Year == ${year}`
+                        }
+                    ],
+                    "mark":{
+                        "type":"geoshape",
+                        "stroke":"#fff",
+                        "strokeWidth":0.5
+                    },
+                    "encoding":{
+                        "shape":{
+                            "field":"geo",
+                            "type":"geojson"
+                        },
+                        "color":{
+                            "field":"Average_Price",
+                            "type":"quantitative",
+                            "scale":{
+                                "type":"threshold",
+                                "domain":[
+                                    0.5,
+                                    1,
+                                    2,
+                                    3,
+                                    4,
+                                    5,
+                                    6,
+                                    7,
+                                    8,
+                                    9,
+                                    10
+                                ],
+                                "range":[
+                                    "#c5cae9",
+                                    "#9fa8da",
+                                    "#7986cb",
+                                    "#5c6bc0",
+                                    "#3f51b5",
+                                    "#3949ab"
+                                ]
+                            },
+                            "legend":{
+                                "format":".2s"
+                            }
+                        },
+                        "tooltip":[
+                            {
+                                "field":"Continental region",
+                                "type":"nominal",
+                                "title":"Continent"
+                            },
+                            {
+                                "field":"Average_Price",
+                                "type":"quantitative",
+                                "title":"Average Price in USD",
+                                "format":","
+                            },
+                            {
+                                "field":"Year",
+                                "type":"quantitative",
+                                "title":"Year"
+                            }
+                        ]
+                    }
+                }],
+          "config":{}};
+          
+        var top_low_price_data = 
               {
                   "hconcat":[
                       {
@@ -415,12 +368,13 @@
                           }
                       }
                   ]
-              }
-          ],
-          "config":{}
+              
       };
+        
+      document.getElementById("vis").innerHTML = "";
+        vegaEmbed('#vis', world_map_data);
         document.getElementById("vis").innerHTML = "";
-        vegaEmbed('#vis', data);
+        vegaEmbed('#vis_b', top_low_price_data);
       }
 
       renderGraph(2022);
