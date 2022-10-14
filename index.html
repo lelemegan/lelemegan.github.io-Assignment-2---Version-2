@@ -15,16 +15,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="icon" href="tab-logo.png">
 </head>
   <body>
     <div class="first-container"> <!--tried adding pure-g here-->
-        <div class="block"> <!--tried adding pure-u-5-5 here-->
+        <div class="head-block"> <!--tried adding pure-u-5-5 here-->
             <h1>HOW MUCH IS 1GB OF DATA?</h1>
             <h4>Have you ever wondered how much is 1GB of data in the other side of the world?
                 Has there been more internet users? Which region is stagnant and which is not?
             </h4>
         </div>
-        <div class="block">
+        <div class="head-block">
             <button onclick="navigateToAnchor('average_price_container')" class="pure-button">
                 <i class="fa fa-chevron-down" aria-hidden="true"></i>        Let's See
             </button>
@@ -47,24 +49,19 @@
             <button onclick="renderGraph(2022)" class="pure-button">
                 2022
             </button>
+            <h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;[<-- Click to filter]
+            </h4>
         </div>
         <div class="vis-block">
             <div id="vis"></div>
         </div>
         <div class="block">
-            <div class="paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nibh id erat gravida, in porta elit mollis. 
-                Quisque in ligula mollis, rhoncus orci sit amet, hendrerit neque. Ut eu posuere augue. Nulla non lacus sem. Nullam 
-                non mauris neque. In hac habitasse platea dictumst. In pharetra eu odio ut rhoncus. Vestibulum non laoreet odio. 
-                Praesent venenatis egestas tristique. Pellentesque leo tortor, feugiat vitae consectetur et, semper eu augue. 
-                Pellentesque at vulputate mauris, non rhoncus enim. Quisque elementum leo lacus, ut imperdiet ipsum laoreet id. 
-                Aliquam ut massa tincidunt, sollicitudin dui a, semper ligula. Phasellus et elit ornare, efficitur est sit amet, 
-                bibendum enim. Etiam euismod ultrices nibh eu facilisis.
-                <br>
-                <br>
-                Nam feugiat velit ut bibendum laoreet. Proin sed quam magna. Fusce porttitor orci suscipit semper gravida. Phasellus 
-                ac erat sollicitudin, accumsan purus vitae, blandit ex. Nullam turpis turpis, tincidunt in lorem a, placerat feugiat 
-                ante. Nulla facilisi. Praesent lorem quam, gravida in tellus sollicitudin, blandit pretium enim.
+            <div id="first-para" class="paragraph">
+                The average price of 1GB of data has gradually decreased over the years. According to research, data price deflation
+                has been a norm for years. The price of 1GB of data falls each year and is not easily affected by other factors. The 
+                reason for this is that while price of data is decreasing, demand for data has never ceased. Data usage has increased
+                simultaneously over the years. 
             </div>
         </div>
         <div class="vis-block">
@@ -87,9 +84,9 @@
             </div>
         </div>
     </div>
-    <div class="third-container">
-        <div class="block"> <!--tried adding pure-u-5-5 here-->
-            <h1>HOW MUCH IS 1GB OF DATA?</h1>
+    <div class="third-container parallax">
+        <div class="third-block"> <!--tried adding pure-u-5-5 here-->
+            <h1>HOW MANY INTERNET USERS ARE THERE IN THE WORLD?</h1>
             <h4>Have you ever wondered how much is 1GB of data in the other side of the world?
                 Has there been more internet users? Which region is stagnant and which is not?
             </h4>
@@ -103,7 +100,7 @@
     </div>
     <div class="third-container">
         <div class="block"> <!--tried adding pure-u-5-5 here-->
-            <h1>HOW MUCH IS 1GB OF DATA?</h1>
+            <h1>WHAT PERCENTAGE OF THE POPULATION ARE INTERNET USERS?</h1>
             <h4>Have you ever wondered how much is 1GB of data in the other side of the world?
                 Has there been more internet users? Which region is stagnant and which is not?
             </h4>
@@ -113,8 +110,39 @@
         <div class="block">
             <h3>Percentage of Internet Users</h3>
         </div>
-        <div id="vis3"></div>
+        <div class="fifth-container">
+            <div id="vis3"></div>
+            <div class="paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nibh id erat gravida, in porta elit mollis. 
+                Quisque in ligula mollis, rhoncus orci sit amet, hendrerit neque. Ut eu posuere augue. Nulla non lacus sem. Nullam 
+                non mauris neque. In hac habitasse platea dictumst. In pharetra eu odio ut rhoncus. Vestibulum non laoreet odio. 
+                Praesent venenatis egestas tristique. 
+                <br>
+                <br>
+                Nam feugiat velit ut bibendum laoreet. Proin sed quam magna. Fusce porttitor orci suscipit semper gravida. Phasellus 
+                ac erat sollicitudin, accumsan purus vitae, blandit ex. Nullam turpis turpis, tincidunt in lorem a, placerat feugiat 
+                ante. Nulla facilisi. Praesent lorem quam, gravida in tellus sollicitudin, blandit pretium enim.
+            </div>
+        </div>
+        
     </div>
+    <div class="last-container">
+        <div class="last-block">
+            <div class="last-paragraph">
+                Tiong Le Megan | FIT3179 | 33332053
+                <br>
+                <br>
+                <b>Datasource</b>
+                <br>
+                Price Dataset credits to <a href="https://www.cable.co.uk/">Cable CO UK</a>
+                <br>
+                Population in Numbers Dataset credits to <a href="https://data.worldbank.org/">Data World Bank</a>
+                <br>
+                Population in Percentage Dataset credits to <a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS">Data World Bank</a>
+            </div>
+        </div>
+    </div>
+    </body>
     <script type="text/javascript">
       function navigateToAnchor(id){
         location.href=`#${id}`;
@@ -127,7 +155,7 @@
               "resize":true
           },
           "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
-            "title":`Average Price in the World ${year}`,
+            "title":`Average Price in the World ${year} in USD`,
             "width":550,
             "height":300,
             "projection":{
@@ -164,7 +192,7 @@
                     ],
                     "mark":{
                         "type":"geoshape",
-                        "fill":"#ddd",
+                        "fill":"#B7B69D",
                         "stroke":"white",
                         "strokeWidth":1
                     },
@@ -213,32 +241,38 @@
                             "scale":{
                                 "type":"threshold",
                                 "domain":[
-                                    0.5,
                                     1,
-                                    2,
                                     3,
-                                    4,
                                     5,
-                                    6,
                                     7,
-                                    8,
                                     9,
-                                    10
+                                    11,
+                                    13,
+                                    15
                                 ],
                                 "range":[
-                                    "#c5cae9",
-                                    "#9fa8da",
-                                    "#7986cb",
-                                    "#5c6bc0",
-                                    "#3f51b5",
-                                    "#3949ab"
+                                    "#1984c5", 
+                                    "#22a7f0", 
+                                    "#63bff0", 
+                                    "#a7d5ed", 
+                                    "#e2e2e2", 
+                                    "#e1a692", 
+                                    "#de6e56", 
+                                    "#e14b31", 
+                                    "#c23728"
                                 ]
                             },
                             "legend":{
-                                "format":".2s"
+                                "format":".2s",
+                                "title": "Average Price"
                             }
                         },
                         "tooltip":[
+                            {
+                                "field":"Name",
+                                "type":"nominal",
+                                "title":"Country"
+                            },
                             {
                                 "field":"Continental region",
                                 "type":"nominal",
@@ -340,7 +374,7 @@
                                   ]
                               },
                               {
-                                  "filter":"datum.rank <=5"
+                                  "filter":"datum.rank <=10"
                               }
                           ],
                           "mark":{
@@ -375,8 +409,11 @@
         vegaEmbed('#vis', world_map_data);
         document.getElementById("vis").innerHTML = "";
         vegaEmbed('#vis_b', top_low_price_data);
+
+        // document.getElementById("first-para").innerHTML = "`$Year`";
       }
 
+      
       renderGraph(2022);
 
       var yourV2Spec = {
@@ -422,8 +459,8 @@
                   "field": "Country_Name",
                   "oneOf": ["North America", "Europe & Central Asia", "Middle East & North Africa", "Latin America & Caribbean", "East Asia & Pacific", "South Asia", "Sub-Saharan Africa"]}
 }],
-  "width": 600,
-  "height": 200,
+  "width": 300,
+  "height": 150,
   "mark": "line",
   "encoding": {
     "x": {"field": "Year", "type": "temporal",
@@ -433,8 +470,8 @@
   }},
   {
   "transform": [{"filter": "datum.Country_Name=='World'"}],
-  "width": 600,
-  "height": 100,
+  "width": 300,
+  "height": 50,
   "mark": "line",
   "params": [
         {

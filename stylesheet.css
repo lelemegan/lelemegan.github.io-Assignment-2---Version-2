@@ -8,9 +8,13 @@
     background: #FFF1F1;
 }
 
+.head-block{
+    width: 60%
+}
+
 .block{
     /* background-color: rebeccapurple; */
-    width: 60%
+    width: 70%
 }
 
 h1{
@@ -54,10 +58,11 @@ h3{
 .third-container{
     display: flex;
     width: 100%;
-    
+    height: 300px;
+
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: center;
     background: #FFF1F1;
 
     padding-bottom: 3em;
@@ -74,6 +79,17 @@ h3{
     /* justify-content: center; */
 }
 
+.fifth-container{
+    padding-top: 3em;
+    padding-bottom: 3em;
+    display: flex;
+    width: 70%;
+    /* height: 500px; */
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+}
+
 .paragraph{
     padding-top: 0.1em;
     font-family: 'Roboto', sans-serif;
@@ -84,4 +100,60 @@ h3{
 
 html {
     scroll-behavior: smooth;
+}
+
+.vis-block{
+    padding-top: 2em;
+}
+    
+/* For Parallax Effect */
+.parallax {
+    /* The image used */
+    background-image: url("Mobile-Phone-Bg.jpg");
+    
+    /* Set a specific height */
+    min-height: 500px;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.third-block{
+    /* top | left | bottom | right */
+    padding: 0em 1em 1em 2em;
+    width: 60%;
+    background: rgba(217, 217, 217, 0.8);
+    border-radius: 20px;
+}
+
+.third-block h1{
+    color: white
+}
+
+.third-block h4{
+    color: white
+}
+
+.last-container{
+    display: flex;
+    width: 100%;
+    height: 100px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #FFF1F1;
+}
+
+.last-paragraph{
+    font-size: 9px;
+    color: #D67878;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.last-block{
+    width: 20%
 }
