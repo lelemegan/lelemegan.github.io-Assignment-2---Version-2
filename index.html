@@ -207,6 +207,7 @@
                         "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
                     },
                     "transform":[
+                    {"calculate": "toNumber(datum.Average_Price)", "as": "Average_Price"},
                         {
                             "lookup":"Name",
                             "from":{
@@ -295,115 +296,72 @@
           "config":{}};
           
         var top_low_price_data = 
-              {
-                  "hconcat":[
-                      {
-                          "title":"Average Lowest Price of 1GB of Data",
-                          "width":150,
-                          "data":{
-                              "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
-                          },
-                          "transform":[
-                              {
-                                  "filter":`datum.Year == ${year} & datum.Average_Price>0`
-                              },
-                              {
-                                  "window":[
-                                      {
-                                          "op":"rank",
-                                          "as":"rank"
-                                      }
-                                  ],
-                                  "sort":[
-                                      {
-                                          "field":"Average_Price",
-                                          "order":"ascending"
-                                      }
-                                  ]
-                              },
-                              {
-                                  "filter":"datum.rank <=5"
-                              }
-                          ],
-                          "mark":{
-                              "type":"bar",
-                              "cornerRadiusEnd":4
-                          },
-                          "encoding":{
-                              "x":{
-                                  "field":"Name",
-                                  "title":"Country",
-                                  "type":"nominal",
-                                  "sort":{
-                                      "field":"Average_Price",
-                                      "order":"descending"
-                                  }
-                              },
-                              "y":{
-                                  "field":"Average_Price",
-                                  "title":"Average Price",
-                                  "type":"quantitative"
-                              },
-                              "color":{
-                                  "value":"#ff9900"
-                              }
-                          }
-                      },
-                      {
-                          "title":"Average Most Expensive Price of 1GB of Data",
-                          "width":150,
-                          "data":{
-                              "url":"https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
-                          },
-                          "transform":[
-                              {
-                                  "filter":`datum.Year == ${year} & datum.Average_Price>0`
-                              },
-                              {
-                                  "window":[
-                                      {
-                                          "op":"rank",
-                                          "as":"rank"
-                                      }
-                                  ],
-                                  "sort":[
-                                      {
-                                          "field":"Average_Price",
-                                          "order":"descending"
-                                      }
-                                  ]
-                              },
-                              {
-                                  "filter":"datum.rank <=10"
-                              }
-                          ],
-                          "mark":{
-                              "type":"bar",
-                              "cornerRadiusEnd":4
-                          },
-                          "encoding":{
-                              "x":{
-                                  "field":"Name",
-                                  "title":"Country",
-                                  "type":"nominal",
-                                  "sort":{
-                                      "field":"Average_Price",
-                                      "order":"descending"
-                                  }
-                              },
-                              "y":{
-                                  "field":"Average_Price",
-                                  "title":"Average Price",
-                                  "type":"quantitative"
-                              },
-                              "color":{
-                                  "value":"#ff9900"
-                              }
-                          }
-                      }
-                  ]
-              
-      };
+        {
+  "hconcat": [
+    {
+      "title": "Average Lowest Price of 1GB of Data",
+      "width": 150,
+      "data": {
+        "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
+      },
+      "transform": [
+        {"calculate": "toNumber(datum.Average_Price)", "as": "Average_Price_Num"},
+        {"filter": `datum.Year == ${year} & datum.Average_Price_Num>0`},
+        {
+          "window": [{"op": "rank", "as": "rank"}],
+          "sort": [{"field": "Average_Price_Num", "order": "ascending"}]
+        },
+        {"filter": "datum.rank <=5"}
+      ],
+      "mark": {"type": "bar", "cornerRadiusEnd": 4},
+      "encoding": {
+        "x": {
+          "field": "Name",
+          "title": "Country",
+          "type": "nominal",
+          "sort": {"field": "Average_Price_Num", "order": "ascending"}
+        },
+        "y": {
+          "field": "Average_Price_Num",
+          "title": "Average Price",
+          "type": "quantitative"
+        },
+        "color": {"value": "#ff9900"}
+      }
+    },
+    {
+      "title": "Average Most Expensive Price of 1GB of Data",
+      "width": 150,
+      "data": {
+        "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Price%20Dataset.csv"
+      },
+      "transform": [
+        {"calculate": "toNumber(datum.Average_Price)", "as": "Average_Price_Num"},
+        {"filter": `datum.Year == ${year} & datum.Average_Price_Num>0`},
+        {
+          "window": [{"op": "rank", "as": "rank"}],
+          "sort": [{"field": "Average_Price_Num", "order": "descending"}]
+        },
+        {"filter": "datum.rank <=5"}
+      ],
+      "mark": {"type": "bar", "cornerRadiusEnd": 4},
+      "encoding": {
+        "x": {
+          "field": "Name",
+          "title": "Country",
+          "type": "nominal",
+          "sort": {"field": "Average_Price_Num", "order": "descending"}
+        },
+        "y": {
+          "field": "Average_Price_Num",
+          "title": "Average Price",
+          "type": "quantitative"
+        },
+        "color": {"value": "#ff9900"}
+      }
+    }
+  ]
+};
         
       document.getElementById("vis").innerHTML = "";
         vegaEmbed('#vis', world_map_data);
