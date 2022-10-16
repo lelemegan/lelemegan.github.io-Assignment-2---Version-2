@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+*{
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .first-container{
     display: flex;
     width: 100%;
@@ -14,19 +20,20 @@
 
 .block{
     /* background-color: rebeccapurple; */
-    width: 70%
+    width: 70%;
 }
 
 h1{
     font-size: 48px;
     color: #D67878;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: normal;
 }
 
 h4{
     font-size: 16px;
     color: #D67878;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 300;
 }
 
@@ -34,13 +41,16 @@ h3{
     text-align: left;
     font-size: 36px;
     color: #D67878;
-    font-family: 'Roboto', sans-serif;
 }
 
 .block-button{
     display: flex;
     align-items: center;
     padding-bottom: 1em;
+}
+
+.pure-button:active{
+    color: red;
 }
 
 .second-container{
@@ -92,7 +102,6 @@ h3{
 
 .paragraph{
     padding-top: 0.1em;
-    font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 14px;
     text-align: justify;
@@ -150,10 +159,26 @@ html {
 .last-paragraph{
     font-size: 9px;
     color: #D67878;
-    font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
 
 .last-block{
     width: 20%
 }
+
+.highlight-lowest{
+    background-color: #D6DFFF;
+    color: #0B0C71;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 30px;
+}
+
+.highlight-highest{
+    background-color: #0B0C71;
+    color: #D6DFFF;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 30px;
+}
+

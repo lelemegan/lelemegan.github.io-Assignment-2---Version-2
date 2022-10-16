@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="icon" href="tab-logo.png">
+
 </head>
   <body>
     <div class="first-container"> <!--tried adding pure-g here-->
@@ -69,19 +70,25 @@
         </div>
         <div class="block">
             <div class="paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nibh id erat gravida, in porta elit mollis. 
-                Quisque in ligula mollis, rhoncus orci sit amet, hendrerit neque. Ut eu posuere augue. Nulla non lacus sem. Nullam 
-                non mauris neque. In hac habitasse platea dictumst. In pharetra eu odio ut rhoncus. Vestibulum non laoreet odio. 
-                Praesent venenatis egestas tristique. Pellentesque leo tortor, feugiat vitae consectetur et, semper eu augue. 
-                Pellentesque at vulputate mauris, non rhoncus enim. Quisque elementum leo lacus, ut imperdiet ipsum laoreet id. 
-                Aliquam ut massa tincidunt, sollicitudin dui a, semper ligula. Phasellus et elit ornare, efficitur est sit amet, 
-                bibendum enim. Etiam euismod ultrices nibh eu facilisis.
+                In <b>2019</b>, we can see that <span class="highlight-lowest">Mayotte</span> has the lowest average price (of 1GB of data) of 0.22USD in the world
+                while <span class="highlight-highest">Nicaragua</span> has the highest average price (of 1GB of data) of 65.83USD in the world. Mayotte continued
+                to be the lowest the subsequent year. Following that, Mayotte dropped out of the lowest five category as 
+                the price of data increased to 1.2USD. 
                 <br>
                 <br>
-                Nam feugiat velit ut bibendum laoreet. Proin sed quam magna. Fusce porttitor orci suscipit semper gravida. Phasellus 
-                ac erat sollicitudin, accumsan purus vitae, blandit ex. Nullam turpis turpis, tincidunt in lorem a, placerat feugiat 
-                ante. Nulla facilisi. Praesent lorem quam, gravida in tellus sollicitudin, blandit pretium enim.
+                In 2020, <span class="highlight-lowest">Mayotte</span> was the country with lowest price (of 1GB of data) of 0.08USD only. The price of 1GB of data dropped 
+                significantly by more than half compared to the previous year, 2019. On the other hand, <span class="highlight-highest">Saint Helena</span> has the average 
+                most expensive price (of 1GB of data) of 52.5USD.
+                <br>
+                <br>
+                In 2021, <span class="highlight-lowest">Israel</span> has the average lowest price (of 1GB of data) of 0.05USD. Whereas, <span class="highlight-highest">Saint Helena</span> 
+                continued to be the country with average highest price (of 1GB of data) of 41.06USD. Saint Helena has a significant decrease of more than 10USD. 
+                <br>
+                <br>
+                This year, up till July, <span class="highlight-lowest">Israel</span> remained in the category of average lowest price (of 1GB of data) with an even lower price 
+                of 0.04USD while <span class="highlight-highest">Saint Helena</span> stayed as the country with average most expensive price (of 1GB of data) of 41.06USD, which is the same as the previous year, 2021. 
             </div>
+            
         </div>
     </div>
     <div class="third-container parallax">
@@ -155,7 +162,7 @@
               "resize":true
           },
           "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
-            "title":`Average Price in the World ${year} in USD`,
+            "title":`Average Price of 1GB of Data in the World ${year}`,
             "width":550,
             "height":300,
             "projection":{
@@ -252,20 +259,20 @@
                                     15
                                 ],
                                 "range":[
-                                    "#1984c5", 
-                                    "#22a7f0", 
-                                    "#63bff0", 
-                                    "#a7d5ed", 
-                                    "#e2e2e2", 
-                                    "#e1a692", 
-                                    "#de6e56", 
-                                    "#e14b31", 
-                                    "#c23728"
+                                    "#D6DFFF", 
+                                    "#B6C5F8", 
+                                    "#91A5E9", 
+                                    "#677FD6", 
+                                    "#455BC4", 
+                                    "#283AB5", 
+                                    "#0B1BA5", 
+                                    "#0B148B", 
+                                    "#0B0C71"
                                 ]
                             },
                             "legend":{
                                 "format":".2s",
-                                "title": "Average Price"
+                                "title": "Average Price (in USD)"
                             }
                         },
                         "tooltip":[
@@ -323,10 +330,14 @@
         },
         "y": {
           "field": "Average_Price_Num",
-          "title": "Average Price",
+          "title": "Average Price (in USD)",
           "type": "quantitative"
         },
-        "color": {"value": "#ff9900"}
+    "tooltip": [
+      {"field": "Name", "type": "ordinal", "title": "Country"},
+      {"field": "Average_Price_Num", "type": "quantitative", "title": "Average Price (in USD)"},
+    {"field": "Year", "type": "quantitative", "title": "Year"}],
+        "color": {"value": "#D6DFFF"}
       }
     },
     {
@@ -354,10 +365,14 @@
         },
         "y": {
           "field": "Average_Price_Num",
-          "title": "Average Price",
+          "title": "Average Price (in USD)",
           "type": "quantitative"
         },
-        "color": {"value": "#ff9900"}
+    "tooltip": [
+      {"field": "Name", "type": "ordinal", "title": "Country"},
+      {"field": "Average_Price_Num", "type": "quantitative", "title": "Average Price (in USD)"},
+    {"field": "Year", "type": "quantitative", "title": "Year"}],
+        "color": {"value": "#0B0C71"}
       }
     }
   ]
@@ -374,74 +389,188 @@
       
       renderGraph(2022);
 
-      var yourV2Spec = {
-  "data": {"url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/number-of-internet-users-by-country.csv"},
-  "vconcat":[
-{ "transform": [{"filter": {
-                  "field": "Country_Name",
-                  "oneOf": ["North America", "China", "India", "Latin America & Caribbean", "East Asia & Pacific", "South Asia", "Sub-Saharan Africa"]}
-}],
-  "width": 600,
-  "height": 200,
-  "mark": "area",
-  "encoding": {
-    "x": {"field": "Year", "type": "temporal",
-          "scale": {"domain": {"param": "time_brush"}}},
-    "y": {"field": "No_Of_Internet_Users", "type": "quantitative", "title": "Number of Internet Users"},
-    "color": {"field": "Country_Name", "type": "nominal","title": "Continental Region"}
-  }},
-  {
-  "transform": [{"filter": "datum.Country_Name=='World'"}],
-  "width": 600,
-  "height": 100,
-  "mark": "line",
-  "params": [
-        {
-          "name": "time_brush",
-          "select": {"type": "interval", "encodings": ["x"]}
-        }
-      ],
-  "encoding": {
-    "x": {"field": "Year", "type": "temporal"},
-    "y": {"field": "No_Of_Internet_Users", "type": "quantitative", "title": "Number of Internet Users"},
-    "color": {"field": "Country_Name", "type": "nominal"}
-  }}
-  ]
-};
-      vegaEmbed('#vis2', yourV2Spec);
+      var Number_Of_Internet_Users_Vis = {
+                                            "data": {
+                                                "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/number-of-internet-users-by-country.csv"
+                                            },
+                                            "vconcat": [
+                                                {
+                                                "transform": [
+                                                    {
+                                                    "filter": {
+                                                        "field": "Country_Name",
+                                                        "oneOf": [
+                                                        "North America",
+                                                        "Europe",
+                                                        "Africa",
+                                                        "South America",
+                                                        "East Asia & Pacific",
+                                                        "South Asia",
+                                                        "Asia"
+                                                        ]
+                                                    }
+                                                    }
+                                                ],
+                                                "width": 600,
+                                                "height": 200,
+                                                "mark": "area",
+                                                "encoding": {
+                                                    "x": {
+                                                    "field": "Year",
+                                                    "type": "temporal",
+                                                    "scale": {"domain": {"param": "time_brush"}}
+                                                    },
+                                                    "y": {
+                                                    "field": "No_Of_Internet_Users",
+                                                    "type": "quantitative",
+                                                    "title": "Number of Internet Users"
+                                                    },
+                                                    "color": {
+                                                    "field": "Country_Name",
+                                                    "type": "nominal",
+                                                    "title": "Continental Region"
+                                                    },
+                                                        "tooltip":[
+                                                    {
+                                                        "field":"Country_Name",
+                                                        "type":"nominal",
+                                                        "title":"Continental Region"
+                                                    },
+                                                    {
+                                                    "field": "No_Of_Internet_Users",
+                                                    "type": "quantitative",
+                                                    "title": "Number of Internet Users"
+                                                    }
+                                                ]
+                                                }
+                                                },
+                                                {
+                                                "transform": [{"filter": "datum.Country_Name=='World'"}],
+                                                "width": 600,
+                                                "height": 100,
+                                                "mark": "line",
+                                                "params": [
+                                                    {
+                                                    "name": "time_brush",
+                                                    "select": {"type": "interval", "encodings": ["x"]}
+                                                    }
+                                                ],
+                                                "encoding": {
+                                                    "x": {"field": "Year", "type": "temporal"},
+                                                    "y": {
+                                                    "field": "No_Of_Internet_Users",
+                                                    "type": "quantitative",
+                                                    "title": "Number of Internet Users"
+                                                    },
+                                                    "color": {"field": "Country_Name", "type": "nominal"}
+                                                }
+                                                }
+                                            ]
+                                            };
+      vegaEmbed('#vis2', Number_Of_Internet_Users_Vis);
 
       var yourV3Spec = {
-  "data": {"url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Internet%20Users%20Dataset.csv"},
-  "vconcat":[
-{ "transform": [{"filter": {
-                  "field": "Country_Name",
-                  "oneOf": ["North America", "Europe & Central Asia", "Middle East & North Africa", "Latin America & Caribbean", "East Asia & Pacific", "South Asia", "Sub-Saharan Africa"]}
-}],
-  "width": 300,
-  "height": 150,
-  "mark": "line",
-  "encoding": {
-    "x": {"field": "Year", "type": "temporal",
-          "scale": {"domain": {"param": "time_brush"}}},
-    "y": {"field": "Users_Percentage", "type": "quantitative"},
-    "color": {"field": "Country_Name", "type": "nominal"}
-  }},
-  {
-  "transform": [{"filter": "datum.Country_Name=='World'"}],
-  "width": 300,
-  "height": 50,
-  "mark": "line",
-  "params": [
+  "data": {
+    "url": "https://raw.githubusercontent.com/lelemegan/lelemegan.github.io/main/Version1%20Internet%20Users%20Dataset.csv"
+  },
+  "vconcat": [
+    {
+      "transform": [
+        {
+          "calculate": "toNumber(datum.Users_Percentage)",
+          "as": "User_Percentage"
+        },
+        {
+          "filter": {
+            "field": "Country_Name",
+            "oneOf": [
+              "North America",
+              "Europe & Central Asia",
+              "Middle East & North Africa",
+              "Latin America & Caribbean",
+              "East Asia & Pacific",
+              "South Asia",
+              "Sub-Saharan Africa"
+            ]
+          }
+        }
+      ],
+      "width": 300,
+      "height": 150,
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "scale": {"domain": {"param": "time_brush"}}
+        }},
+      "layer": [
+        {
+          "encoding": {
+            "y": {
+              "field": "Users_Percentage", 
+              "type": "quantitative",
+              "title": "% of Internet Users"
+            },
+            "color": {"field": "Country_Name", "type": "nominal", "title": "Continental Region", "mark": "line"}
+          },
+          "layer": [
+            {"mark": "line"},
+            {"transform": [{"filter": {"param": "hover", "empty": false}}], "mark": "point"}
+          ]
+        },
+        {
+          "transform": [{"pivot": "Country_Name", "value": "User_Percentage", "groupby": ["Year"]}],
+          "mark": "rule",
+          "encoding": {
+            "opacity": {
+              "condition": {"value": 0.3, "param": "hover", "empty": false},
+              "value": 0
+            },
+            "tooltip": [
+              {"field": "North America", "type": "quantitative", "format": ".2f"},
+              {"field": "Europe & Central Asia", "type": "quantitative", "format": ".2f"},
+              {"field": "Middle East & North Africa", "type": "quantitative", "format": ".2f"},
+              {"field": "Latin America & Caribbean", "type": "quantitative", "format": ".2f"},
+              {"field": "East Asia & Pacific", "type": "quantitative", "format": ".2f"},
+              {"field": "South Asia", "type": "quantitative", "format": ".2f"},
+              {"field": "Sub-Saharan Africa", "type": "quantitative", "format": ".2f"}
+            ]
+          },
+          "params": [{
+            "name": "hover",
+            "select": {
+              "type": "point",
+              "fields": ["Year"],
+              "nearest": true,
+              "on": "mouseover",
+              "clear": "mouseout"
+            }
+         }]
+        
+        }]
+    },
+    {
+      "transform": [{"filter": "datum.Country_Name=='World'"}],
+      "width": 300,
+      "height": 50,
+      "mark": "line",
+      "params": [
         {
           "name": "time_brush",
           "select": {"type": "interval", "encodings": ["x"]}
         }
       ],
-  "encoding": {
-    "x": {"field": "Year", "type": "temporal"},
-    "y": {"field": "Users_Percentage", "type": "quantitative"},
-    "color": {"field": "Country_Name", "type": "nominal"}
-  }}
+      "encoding": {
+        "x": {"field": "Year", "type": "temporal"},
+        "y": {
+          "field": "Users_Percentage", 
+          "type": "quantitative",
+          "title": "% of Internet Users"
+        },
+        "color": {"field": "Country_Name", "type": "nominal"}
+      }
+    }
   ]
 };
 vegaEmbed('#vis3', yourV3Spec);
